@@ -1,0 +1,19 @@
+<div class="new-blog-div">
+    <button type="submit" class="btn" id="new-blog-btn">New Blog</button>
+</div>
+
+{{#if blogs.length}}
+<div>
+    <h2>Dashboard</h2>
+    <ul class="blog-list">
+        {{#each blogs}}
+        <li class="blog-list-item">
+            <a href="/blog/{{this._id}}">{{this.title}}</a>
+            <button class="btn delete-blog-btn" data-id="{{this._id}}">Delete</button>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+{{/if}}
+
+<script src="/public/javascript/new-post.js"></script>

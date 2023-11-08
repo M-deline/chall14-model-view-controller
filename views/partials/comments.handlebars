@@ -1,0 +1,30 @@
+<div class="comment-info">
+    {{#each this}}
+    <div class="comment">
+        <div class="created-date">
+            {{user.username}} commented on {{format_date}}
+        </div>
+        <div class="text">
+            {{text}}
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<div class="blog-post-info">
+    <div class="blog-card">
+        <div class="info-div">
+            <div class="blog-title">
+                <a href="/blog/{{id}}">{{title}}</a>
+            </div>
+            <div class="created-user">
+                <p id="comment-info">
+                    Blog created by {{user.username}} on {{format_date}}
+                </p>
+            </div>
+        </div>
+        <div class="blog-content">
+            <p>{{content}}</p>
+        </div>
+    </div>
+</div>
