@@ -14,7 +14,6 @@ const app = express();
 // app.use(cors());
 const PORT = process.env.PORT || 3001;
 
-// Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });
 
 
@@ -31,16 +30,26 @@ const sess = {
 
 app.use(session(sess));
 
-// Inform Express.js on which template engine to use
+
+// app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
+// app.use(express.static('public'));
+// app.use(require('./controllers/'));
+// app.use(routes);
+
+app.get('/dashboard', (_req, res) => {
+  res.render('dashboard');
+});
+
 app.use(require('./controllers/'));
+app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+app.listen(PORT, () => console.log('Now listening'));
 });
