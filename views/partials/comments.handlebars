@@ -1,8 +1,8 @@
-<div class="comment-form">
+<div class="comments">
     {{#each this}}
     <div class="comment">
         <div class="created-date">
-            {{user.username}} commented on {{format_date}}
+            {{user.username}} commented on {{created_at}}
         </div>
         <div class="text">
             {{comment_content}}
@@ -19,7 +19,7 @@
             </div>
             <div class="created-user">
                 <p id="comment-info">
-                    post created by {{user.username}} on {{format_date}}
+                    post created by {{user.username}} on {{format_date created_at}}
                 </p>
             </div>
         </div>

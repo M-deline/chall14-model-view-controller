@@ -6,9 +6,9 @@
 <div>
     <h2>Dashboard</h2>
     <ul class="post-list">
-        {{#each posts}}
+        {{#each posts as |post|}}
         <li class="post-list-item">
-            <a href="/post/{{this._id}}">{{this.title}}</a>
+            <a href="/post/{{post._id}}"></a>
             <button class="btn delete-post-btn" data-id="{{this._id}}">Delete</button>
         </li>
         {{/each}}

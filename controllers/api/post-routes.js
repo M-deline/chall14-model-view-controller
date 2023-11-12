@@ -59,6 +59,7 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err)
     });
 router.post('/', withAuth, (req, res) => {
+    console.log(req.params.id); 
     console.log("making post post...");
     Post.create({
         title: req.body.title,
