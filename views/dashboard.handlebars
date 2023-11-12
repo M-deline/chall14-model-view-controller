@@ -1,15 +1,15 @@
-<div class="new-blog-div">
-    <button type="submit" class="btn" id="new-blog-btn">New Blog</button>
+<div class="new-post-div">
+    <button type="submit" class="btn" id="new-post-btn">New post</button>
 </div>
 
-{{#if blogs.length}}
+{{#if posts.length}}
 <div>
     <h2>Dashboard</h2>
-    <ul class="blog-list">
-        {{#each blogs}}
-        <li class="blog-list-item">
-            <a href="/blog/{{this._id}}">{{this.title}}</a>
-            <button class="btn delete-blog-btn" data-id="{{this._id}}">Delete</button>
+    <ul class="post-list">
+        {{#each posts}}
+        <li class="post-list-item">
+            <a href="/post/{{this._id}}">{{this.title}}</a>
+            <button class="btn delete-post-btn" data-id="{{this._id}}">Delete</button>
         </li>
         {{/each}}
     </ul>

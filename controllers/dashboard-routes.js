@@ -4,7 +4,7 @@ const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     Post.findAll({
         where: {
             user_id: req.session.user_id    
@@ -30,9 +30,9 @@ router.get('/', (req, res) => {
             }
         ]
     })
-    .then(dbBlogData => {
-        const blogs = dbBlogData.map(post => post.get({ plain: true }));
-        res.render('dashboard', { blogs, loggedIn: true });
+    .then(dbpostData => {
+        const posts = dbpostData.map(post => post.get({ plain: true }));
+        res.render('dashboard', { posts, loggedIn: true });
     }
     )
     .catch(err => {
@@ -68,14 +68,14 @@ router.get('/edit/:id', withAuth, (req, res) => {
             }
         ]
     })
-    .then(dbBlogData => {
-        if (!dbBlogData) {
-            res.status(404).json({ message: 'No blog found with this id' });
+    .then(dbpostData => {
+        if (!dbpostData) {
+            res.status(404).json({ message: 'No post found with this id' });
             return;
         }
-        const blog = dbBlogData.get({ plain: true });
-        res.render('edit-blog', {
-            blog,
+        const post = dbpostData.get({ plain: true });
+        res.render('edit-post', {
+            post,
             loggedIn: true
         });
     })
@@ -88,7 +88,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 
 
 router.get('/new', (req, res) => {
-    res.render('new-blog', {
+    res.render('new-post', {
         loggedIn: true
     });
     });

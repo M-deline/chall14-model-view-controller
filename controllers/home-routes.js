@@ -25,9 +25,9 @@ router.get('/', (req, res) => {
             }
         ]
     })
-    .then(dbblogData => {
-        const blogs = dbblogData.map(post => post.get({ plain: true }));
-        res.render('homepage', { blogs, loggedIn: req.session.loggedIn });
+    .then(dbpostData => {
+        const posts = dbpostData.map(post => post.get({ plain: true }));
+        res.render('homepage', { posts, loggedIn: req.session.loggedIn });
     }
     )
     .catch(err => {
@@ -61,13 +61,13 @@ router.get('/', (req, res) => {
                 }
             ]
         })
-        .then(dbblogData => {
-            if (!dbblogData) {
+        .then(dbpostData => {
+            if (!dbpostData) {
                 res.status(404).json({ message: 'Nothing found' });
                 return;
             }
-            const blog = dbblogData.get({ plain: true });
-            res.render('single-post', { blog, loggedIn: req.session.loggedIn });
+            const post = dbpostData.get({ plain: true });
+            res.render('single-post', { post, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);

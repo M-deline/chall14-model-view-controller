@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-//we need the blog posts
+//we need the post posts
 router.get('/', (req, res) => {
     Post.findAll({
         attributes: ['id', 'title', 'content', 'created_at'],
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
             }
         }]
     })
-    .then(dbBlogData => res.json(dbBlogData))
+    .then(dbpostData => res.json(dbpostData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err)
@@ -47,34 +47,52 @@ router.get('/:id', (req, res) => {
         }]
         }
     )  
-    .then(dbBlogData => {
-        if (!dbBlogData) {
+    .then(dbpostData => {
+        if (!dbpostData) {
             res.status(404).json({ message: 'None found' });
             return;
         }
-        res.json(dbBlogData);
+        res.json(dbpostData);
     })
     .catch(err => {
         console.log(err);
         res.status(500).json(err)
     });
 router.post('/', withAuth, (req, res) => {
-    console.log("making blog post...");
+    console.log("making post post...");
     Post.create({
         title: req.body.title,
         content: req.body.content,
         user_id: req.session.user_id
     })
-    .then(dbBlogData => res.json(dbBlogData))
+    .then(dbpostData => res.json(dbpostData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err)
     })
-
+//update a post post
+//delete a post post
+router.delete('/:id', withAuth, (req, res) => {
+    Post.destroy({
+        where: {
+            id: req.params.id, 
+        }
+    })
+    .then(dbpostData => {
+        if (!dbpostData) {
+            res.status(404).json({ message: 'None found' });
+            return;
+        }
+        res.json(dbpostData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err)
+    });
 }
 );
 });
-
+});
 
 
 module.exports = router;
